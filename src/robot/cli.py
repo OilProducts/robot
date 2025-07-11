@@ -1,11 +1,14 @@
+import os
+import pty
 import typer
 
 app = typer.Typer(add_completion=False)
 
 @app.command()
 def activate() -> None:
-    """Start a monitored shell session (placeholder)."""
-    typer.echo("Activating robot session (not yet implemented).")
+    """Start a monitored shell session."""
+    shell = os.environ.get("SHELL", "/bin/bash")
+    pty.spawn(shell)
 
 @app.command(name="query")
 def query_command(question: str) -> None:
