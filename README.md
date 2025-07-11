@@ -99,3 +99,17 @@ The project will be developed in distinct phases, starting with the most critica
    * \[ \] Package the application for easy installation via PyPI.  
    * \[ \] Write comprehensive user and developer documentation.  
    * \[ \] Perform testing across different shells (bash, zsh, fish) and operating systems (Linux, macOS).
+
+## Development Setup
+
+Install in editable mode with dev dependencies:
+
+```bash
+pip install -e .[dev]
+```
+
+Run the command-line interface:
+
+```bash
+robot --help
+```
