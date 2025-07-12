@@ -21,4 +21,4 @@ dev = [
 ]
 
 [project.scripts]
-robot = "robot.cli:app"
+robot = "robot.cli:main"
