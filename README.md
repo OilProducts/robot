@@ -71,6 +71,7 @@ This project will be developed in Python, focusing on robust session management 
    * We will use **Typer** to build the CLI.  
    * The primary commands will be:
      * `robot activate`: Starts the monitored session.
+     * `robot deactivate`: Ends the current session.
      * `robot <query>`: The command used within an active session to ask a question. This command will locate the session log, package it with the query, and send it to the LLM.
 4. **LLM Integration:**  
    * The robot \<query\> command will read the entire content of the current session's log file.  
@@ -83,8 +84,8 @@ The project will be developed in distinct phases, starting with the most critica
 
 1. **Phase 1: Core Session Management**
    * \[x] Implement the `robot activate` command to successfully launch a sub-shell within a pseudo-terminal using Python's pty module.
-   * \[ \] Develop the background logging mechanism to capture all session I/O to a temporary file.  
-   * \[ \] Create the basic `robot <query>` command that reads the log file and the user's query.
+    * \[x] Develop the background logging mechanism to capture all session I/O to a temporary file.
+    * \[x] Create the basic `robot <query>` command that reads the log file and the user's query.
    * \[ \] Integrate with a foundational LLM API to establish the proof-of-concept pipeline.  
 2. **Phase 2: Refinement and Usability**  
    * \[ \] Improve the prompt engineering to handle long session contexts and provide more accurate answers.  
