@@ -1,3 +1,4 @@
+import os
 from typer.testing import CliRunner
 from robot.cli import app
 
@@ -12,11 +13,15 @@ def test_help():
 def test_activate_invokes_pty(monkeypatch):
     called = []
 
-    def fake_spawn(cmd):
-        called.append(cmd)
+    def fake_spawn(cmd, **kwargs):
+        called.append(kwargs)
         return 0
 
     monkeypatch.setattr("pty.spawn", fake_spawn)
     result = runner.invoke(app, ["activate"])
     assert result.exit_code == 0
     assert called
+    assert "master_read" in called[0]
+    assert "stdin_read" in called[0]
+    log_path = result.stdout.split("Session log: ")[1].strip()
+    assert os.path.exists(log_path)

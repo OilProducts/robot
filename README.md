@@ -82,7 +82,7 @@ This project will be developed in Python, focusing on robust session management 
 The project will be developed in distinct phases, starting with the most critical functionality.
 
 1. **Phase 1: Core Session Management**
-   * \[ \] Implement the `robot activate` command to successfully launch a sub-shell within a pseudo-terminal using Python's pty module.
+   * \[x] Implement the `robot activate` command to successfully launch a sub-shell within a pseudo-terminal using Python's pty module.
    * \[ \] Develop the background logging mechanism to capture all session I/O to a temporary file.  
    * \[ \] Create the basic `robot <query>` command that reads the log file and the user's query.
    * \[ \] Integrate with a foundational LLM API to establish the proof-of-concept pipeline.  
