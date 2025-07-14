@@ -77,6 +77,7 @@ This project will be developed in Python, focusing on robust session management 
    * The robot \<query\> command will read the entire content of the current session's log file.  
    * This content will be formatted into a prompt for a large language model. The prompt will be engineered to instruct the LLM to act as a terminal assistant and answer the user's query based on the provided session transcript.  
    * The response from the LLM will be printed directly to the terminal.
+   * Documentation consulted for model usage includes the [OpenAI Cookbook](https://cookbook.openai.com) and [Google AI for Developers](https://ai.google.dev).
 
 ## **5\. Project Roadmap**
 
@@ -87,8 +88,8 @@ The project will be developed in distinct phases, starting with the most critica
     * \[x] Develop the background logging mechanism to capture all session I/O to a temporary file.
     * \[x] Create the basic `robot <query>` command that reads the log file and the user's query.
    * \[ \] Integrate with a foundational LLM API to establish the proof-of-concept pipeline.  
-2. **Phase 2: Refinement and Usability**  
-   * \[ \] Improve the prompt engineering to handle long session contexts and provide more accurate answers.  
+2. **Phase 2: Refinement and Usability**
+   * \[x] Improve the prompt engineering to handle long session contexts and provide more accurate answers.
    * \[ \] Implement clean session start-up and tear-down, including handling of the session log files.  
    * \[ \] Add configuration options (e.g., choosing the LLM provider, setting API keys).  
    * \[ \] Refine the in-session prompt to provide clear feedback to the user.  
