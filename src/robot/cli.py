@@ -5,6 +5,8 @@ import tempfile
 
 import typer
 
+from . import llm
+
 app = typer.Typer(add_completion=False)
 
 
@@ -63,7 +65,8 @@ def query_command(question: str) -> None:
         session_data = f.read()
 
     typer.echo(f"Query: {question}")
-    typer.echo(f"Session data:\n{session_data}")
+    response = llm.ask(question, session_data)
+    typer.echo(response)
 
 
 if __name__ == "__main__":
