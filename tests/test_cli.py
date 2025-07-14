@@ -32,7 +32,18 @@ def test_query_reads_log(tmp_path, monkeypatch, capsys):
     log_file = tmp_path / "session.log"
     log_file.write_text("command output")
     monkeypatch.setenv("ROBOT_SESSION_LOG", str(log_file))
+    called = {}
+
+    def fake_ask(question, session_data, provider=None, model=None):
+        called["question"] = question
+        called["session"] = session_data
+        return "answer"
+
+    monkeypatch.setattr("robot.cli.llm.ask", fake_ask)
+
     main(["what", "is", "going", "on?"])
     out = capsys.readouterr().out
     assert "Query: what is going on?" in out
-    assert "command output" in out
+    assert called["question"] == "what is going on?"
+    assert called["session"] == "command output"
+    assert out.strip().endswith("answer")
