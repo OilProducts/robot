@@ -6,6 +6,7 @@ import tempfile
 import typer
 
 from . import llm
+from rich.console import Console
 
 app = typer.Typer(add_completion=False)
 
@@ -64,9 +65,11 @@ def query_command(question: str) -> None:
     with open(log_path, "r") as f:
         session_data = f.read()
 
-    typer.echo(f"Query: {question}")
-    response = llm.ask(question, session_data)
-    typer.echo(response)
+    console = Console()
+    with console.status("", spinner="dots"):
+        response = llm.ask(question, session_data)
+
+    console.print(response)
 
 
 if __name__ == "__main__":
