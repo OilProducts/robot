@@ -1,4 +1,6 @@
 import os
+import pytest
+import click
 from typer.testing import CliRunner
 from robot.cli import app, main
 
@@ -47,3 +49,22 @@ def test_query_reads_log(tmp_path, monkeypatch, capsys):
     assert called["question"] == "what is going on?"
     assert called["session"] == "command output"
     assert out.strip().endswith("answer")
+
+
+def test_query_missing_api_key(tmp_path, monkeypatch, capsys):
+    """The CLI should print a helpful message when llm.ask fails."""
+    log_file = tmp_path / "session.log"
+    log_file.write_text("cmd")
+    monkeypatch.setenv("ROBOT_SESSION_LOG", str(log_file))
+
+    def fail(question, session_data, provider=None, model=None):
+        raise RuntimeError("OPENAI_API_KEY not set")
+
+    monkeypatch.setattr("robot.cli.llm.ask", fail)
+
+    with pytest.raises(click.exceptions.Exit) as exc:
+        main(["why?"])
+    assert exc.value.exit_code == 1
+    out = capsys.readouterr().out
+    assert "OPENAI_API_KEY not set" in out
+    assert "Traceback" not in out
