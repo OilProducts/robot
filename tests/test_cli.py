@@ -43,7 +43,7 @@ def test_query_reads_log(tmp_path, monkeypatch, capsys):
 
     main(["what", "is", "going", "on?"])
     out = capsys.readouterr().out
-    assert "Query: what is going on?" in out
+    assert "Query:" not in out
     assert called["question"] == "what is going on?"
     assert called["session"] == "command output"
     assert out.strip().endswith("answer")
