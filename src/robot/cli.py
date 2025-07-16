@@ -67,7 +67,11 @@ def query_command(question: str) -> None:
 
     console = Console()
     with console.status("", spinner="dots"):
-        response = llm.ask(question, session_data)
+        try:
+            response = llm.ask(question, session_data)
+        except RuntimeError as e:
+            console.print(str(e))
+            raise typer.Exit(1)
 
     console.print(response)
 
